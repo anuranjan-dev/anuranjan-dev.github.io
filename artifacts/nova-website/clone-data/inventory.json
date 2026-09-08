@@ -1,0 +1,44 @@
+{
+  "sections": [
+    {
+      "id": "hero",
+      "text": [
+        "// welcome to my corner of the internet",
+        "Nova",
+        "Hmm.. this should be a quote...",
+        "\u24d8\n      \n        Different people count age differently.\n        Left = years completed &nbsp;|&nbsp; Right = year running"
+      ]
+    },
+    {
+      "id": "about",
+      "text": [
+        "Hey, I'm Nova",
+        "Just a person on the internet who likes making things; whether that's code, stories, characters, or entire fictional universes. I go by Nova online. Not a professional anything yet, just someone who creates because it feels right."
+      ]
+    },
+    {
+      "id": "hobbies",
+      "text": [
+        "Things I actually do"
+      ]
+    },
+    {
+      "id": "projects",
+      "text": [
+        "What I've been building",
+        "View all projects"
+      ]
+    },
+    {
+      "id": "contact",
+      "text": [
+        "Find me online",
+        "Nova\n            @supernova0866\n            \n              \n              \n              \n              \n              \n            \n          \n        \n\n        \n        \n          // connecting...\n        \n\n        \n        \n\n        \n        \n          \n          \n            \n              \n              listening now\n            \n            \u2014\n            \u2014",
+        "GitHub\n          @supernova0866",
+        "Instagram\n          @wtf.nova._",
+        "X / Twitter\n          @supernova0866",
+        "Spotify\n          @wtf.nova._"
+      ]
+    }
+  ]
+}

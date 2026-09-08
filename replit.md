@@ -1,6 +1,6 @@
-# [Project name]
+# Nova Website
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An editorial personal portfolio site with a dark default theme, playful alternate themes, project links, social links, and subtle scroll motion.
 
 ## Run & Operate
 
@@ -22,15 +22,20 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/nova-website/src/App.tsx` — single-page portfolio content and interactions
+- `artifacts/nova-website/src/index.css` — theme tokens, responsive layout, motion, and visual styling
+- `artifacts/nova-website/clone-data/` — captured reference HTML, section inventory, and theme tokens
+- `artifacts/nova-website/public/images/` — local favicon, Discord avatar, and badge assets
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The portfolio is a frontend-only React + Vite artifact; it does not need API or database state.
+- The design preserves the source page's eight theme modes and stores the selected theme in local storage.
+- The page is intentionally a single scroll surface with hash navigation and a fixed bottom navigation pill.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Nova is a personal creative portfolio: visitors can learn about the creator, browse hobbies and projects, switch visual themes, reroll the hero quote, and open social profiles.
 
 ## User preferences
 

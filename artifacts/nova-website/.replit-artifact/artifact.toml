@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Nova Website"
+description = "A polished single-page personal portfolio website rebuilt from the authorized nova.is-a.dev reference, with responsive layout, project links, social links, and subtle interactive motion."
+version = "1.0.0"
+id = "artifacts/nova-website"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26010
+
+[services.development]
+run = "pnpm --filter @workspace/nova-website run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nova-website", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/nova-website/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26010"
+BASE_PATH = "/"
