@@ -1,6 +1,6 @@
-# Nova Website
+# Anuranjan Website
 
-An editorial personal portfolio site with a dark default theme, playful alternate themes, project links, social links, and subtle scroll motion.
+An editorial personal portfolio site for Anuranjan with a dark default theme, playful alternate themes, project links, social links, and subtle scroll motion.
 
 ## Run & Operate
 
@@ -35,7 +35,7 @@ An editorial personal portfolio site with a dark default theme, playful alternat
 
 ## Product
 
-Nova is a personal creative portfolio: visitors can learn about the creator, browse hobbies and projects, switch visual themes, reroll the hero quote, and open social profiles.
+Anuranjan is a personal creative portfolio: visitors can learn about the creator, browse hobbies and the NOVA project, switch visual themes, reroll the hero quote, and open social profiles.
 
 ## User preferences
 

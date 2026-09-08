@@ -42,23 +42,24 @@ const quotes = [
 ];
 
 const hobbies = [
-  { icon: '🎮', title: 'Gaming', desc: "From open worlds to indie gems, if it has a good story or satisfying mechanics, I'm in." },
-  { icon: '✍️', title: 'Writing', desc: "Worldbuilding is my addiction. Lore documents longer than most textbooks, for worlds that exist only in my head." },
-  { icon: '🎨', title: 'Art', desc: "Characters, concepts, creatures. Drawing the things that live rent-free in my imagination." },
+  { icon: '🎮', title: 'Gaming', desc: 'I like games that feel like somewhere you can disappear into for a while.' },
+  { icon: '⚡️', title: 'Learning', desc: "Worldbuilding is my addiction. Lore documents longer than most textbooks, for worlds that exist only in my head." },
+  { icon: '🎨', title: 'Art', desc: 'I enjoy creating visuals, experimenting with styles, and making things that feel like mine.' },
   { icon: '💻', title: 'Dev', desc: 'Building tools, bots, and side projects. Mostly self-taught, mostly chaotic, always learning.' },
 ];
 
 const projects = [
-  { name: '$UPERNOVÆ', desc: 'A collection of fun, pointless and strange tools', tags: ['Coding', 'Web'], status: 'completed', redirect: 'https://supernova0866.github.io/supernovae/' },
-  { name: 'Arcanum', desc: "A Worldbuilding App full of essential and even trivial features for every writer's need. Uses SupabaseDB.", tags: ['Coding', 'App'], status: 'completed', redirect: 'https://supernova0866.github.io/Arcanum' },
-  { name: 'Py Bolt', desc: 'An in-browser Python IDE with a loop explainer.', tags: ['Coding', 'Web'], status: 'completed', redirect: 'https://supernova0866.github.io/PyBolt/' },
+  { name: 'NOVA', desc: 'An AI marketing intelligence platform for youth-focused brands. It helps turn cultural signals and online trends into useful content ideas and campaign directions.', tags: ['AI', 'WEB'], status: 'in progress' },
 ];
 
-function Icon({ type }: { type: 'github' | 'instagram' | 'x' | 'spotify' }) {
+function Icon({ type }: { type: 'github' | 'instagram' }) {
   if (type === 'github') return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>;
   if (type === 'instagram') return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor" stroke="none"/></svg>;
-  if (type === 'x') return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.912-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>;
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 0 1-.277-1.215c3.809-.87 7.077-.496 9.712 1.115.294.18.387.563.207.857zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 0 1-.973-.519.781.781 0 0 1 .52-.973c3.632-1.102 8.147-.568 11.233 1.329a.78.78 0 0 1 .257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.793c3.541-1.073 9.43-.866 13.152 1.337a.937.937 0 0 1-.992 1.613z"/></svg>;
+  return null;
+}
+
+function DiscordIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.54 5.32A16.1 16.1 0 0 0 15.56 4l-.5 1.02a14.1 14.1 0 0 0-6.12 0L8.44 4a16.1 16.1 0 0 0-3.98 1.32C1.94 9.15 1.26 12.88 1.6 16.56A16.3 16.3 0 0 0 6.5 19l1.18-1.6a10.3 10.3 0 0 1-1.85-.9l.45-.34c3.56 1.67 7.42 1.67 10.94 0l.46.34c-.6.36-1.22.66-1.86.9L17 19a16.3 16.3 0 0 0 4.9-2.44c.4-4.26-.68-7.96-2.36-11.24ZM8.77 14.27c-1.06 0-1.92-.98-1.92-2.18s.84-2.18 1.92-2.18 1.93.98 1.92 2.18c0 1.2-.85 2.18-1.92 2.18Zm6.46 0c-1.06 0-1.92-.98-1.92-2.18s.84-2.18 1.92-2.18 1.93.98 1.92 2.18c0 1.2-.85 2.18-1.92 2.18Z"/></svg>;
 }
 
 function SunIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>; }
@@ -78,7 +79,7 @@ function ageText() {
 }
 
 function App() {
-  const [theme, setTheme] = useState<ThemeId>(() => (localStorage.getItem('nova-theme') as ThemeId) || 'dark');
+  const [theme, setTheme] = useState<ThemeId>(() => (localStorage.getItem('anuranjan-theme') as ThemeId) || 'dark');
   const [themeOpen, setThemeOpen] = useState(false);
   const [ageInfo, setAgeInfo] = useState(false);
   const [quote, setQuote] = useState('My workflow starts with being annoyed. Then I cook.');
@@ -89,7 +90,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('nova-theme', theme);
+    localStorage.setItem('anuranjan-theme', theme);
   }, [theme]);
 
   useEffect(() => {
@@ -135,7 +136,7 @@ function App() {
       <main>
         <section id="hero" data-testid="section-hero">
           <p className="hero-eyebrow" data-testid="text-hero-eyebrow">// welcome to my corner of the internet</p>
-          <h1 className="hero-name" data-testid="text-hero-name">No<span>va</span></h1>
+           <h1 className="hero-name" data-testid="text-hero-name">Anu<span>ranjan</span></h1>
           <p className="hero-quote" data-testid="text-hero-quote">{quote}</p>
           <button className={`quote-reroll${quoteSpinning ? ' spinning' : ''}`} type="button" aria-label="New quote" title="Another quote" data-testid="button-new-quote" onClick={reroll}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></button>
           <div className="age-row"><span className="age-pill" data-testid="text-age-hero">{age}</span><button className={`age-info${ageInfo ? ' open' : ''}`} type="button" aria-label="Age info" data-testid="button-age-info" onClick={() => setAgeInfo((open) => !open)}>ⓘ<span className="age-tip">Different people count age differently.<br /><strong>Left</strong> = years completed &nbsp;|&nbsp; <strong>Right</strong> = year running</span></button></div>
@@ -143,10 +144,10 @@ function App() {
         </section>
 
         <section id="about" data-testid="section-about"><div className="container reveal">
-          <div className="section-label">01 — about</div><h2 className="section-title">Hey, I'm <em>Nova</em></h2>
-          <p className="about-body">Just a person on the internet who likes making things; whether that's code, stories, characters, or entire fictional universes. I go by Nova online. Not a professional anything yet, just someone who creates because it feels right.</p>
+           <div className="section-label">01 — about</div><h2 className="section-title">Hey, I'm <em>Anuranjan</em></h2>
+           <p className="about-body">Just a person on the internet who likes making things — code, AI experiments, interfaces, and ideas that begin as random notes. I like exploring, building, and seeing how far one small idea can go.</p>
           <div className="about-grid">
-            {[['identity', 'Nova'], ['age', age], ['status', 'Perpetually online'], ['vibe', 'Chaotic creative']].map(([label, value]) => <div className="about-card" key={label}><div className="about-card-label">{label}</div><div className={`about-card-value${label === 'age' ? ' age-val' : ''}`} data-testid={`text-about-${label}`}>{value}</div></div>)}
+             {[['identity', 'Anuranjan'], ['age', age], ['status', 'Perpetually online'], ['vibe', 'Chaotic creative']].map(([label, value]) => <div className="about-card" key={label}><div className="about-card-label">{label}</div><div className={`about-card-value${label === 'age' ? ' age-val' : ''}`} data-testid={`text-about-${label}`}>{value}</div></div>)}
           </div>
         </div></section>
 
@@ -157,31 +158,29 @@ function App() {
 
         <section id="projects" data-testid="section-projects"><div className="container reveal">
           <div className="section-label">03 — projects</div><h2 className="section-title">What I've been <em>building</em></h2>
-          <div className="projects-list">{projects.map((project, index) => <div className="project-card" key={project.name} data-testid={`card-project-${index + 1}`}><div className="project-num">{String(index + 1).padStart(3, '0')}</div><div className="project-info"><a className="project-card-link" href={project.redirect} target="_blank" rel="noopener noreferrer" data-testid={`link-project-${index + 1}`}><div className="project-title">{project.name}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3" /></svg></div></a><div className="project-desc">{project.desc}</div><div className="project-tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}<span className="badge">{project.status}</span></div></div></div>)}</div>
-          <div className="view-all-wrap"><a href="projects.html" className="view-all-btn" data-testid="link-view-all-projects">View all projects<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a></div>
+           <div className="projects-list">{projects.map((project, index) => <div className="project-card" key={project.name} data-testid={`card-project-${index + 1}`}><div className="project-num">{String(index + 1).padStart(3, '0')}</div><div className="project-info"><div className="project-title">{project.name}</div><div className="project-desc">{project.desc}</div><div className="project-tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}<span className="badge">{project.status}</span></div></div></div>)}</div>
+           <div className="view-all-wrap"><div className="view-all-btn" data-testid="text-more-projects">MORE PROJECTS SOON<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></div></div>
         </div></section>
 
         <section id="contact" data-testid="section-contact"><div className="container reveal">
           <div className="section-label">04 — contact &amp; socials</div><h2 className="section-title">Find me <em>online</em></h2>
           <div className="contact-grid">
-            <a href="https://discord.com/users/875703615099134013" target="_blank" rel="noopener noreferrer" className="discord-card" data-testid="link-discord">
-              <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={`${import.meta.env.BASE_URL}images/discord-avatar.png`} alt="Discord avatar" /><div className="dc-dot" /></div><div className="dc-info"><div className="dc-name">Nova</div><div className="dc-username">@supernova0866</div><div className="dc-badges" aria-label="Discord badges">{['b1', 'b2', 'b3', 'b4', 'b5'].map((badge) => <img key={badge} className="dc-badge" src={`${import.meta.env.BASE_URL}images/${badge}.png`} alt={`Badge ${badge.slice(1)}`} />)}</div></div></div>
+             <a href="https://discord.com/users/1411793737453015231" target="_blank" rel="noopener noreferrer" className="discord-card" data-testid="link-discord">
+               <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={`${import.meta.env.BASE_URL}images/discord-avatar.png`} alt="Discord icon" /><div className="dc-dot online" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name">Instanik</div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username">instanik_62687</div></div></div>
               <div className="dc-activity"><span className="dc-loading">// connecting...</span></div>
             </a>
-            <SocialLink type="github" name="GitHub" handle="@supernova0866" href="https://github.com/supernova0866" />
-            <SocialLink type="instagram" name="Instagram" handle="@wtf.nova._" href="https://www.instagram.com/wtf.nova._" />
-            <SocialLink type="x" name="X / Twitter" handle="@supernova0866" href="https://x.com/supernova0866" />
-            <SocialLink type="spotify" name="Spotify" handle="@wtf.nova._" href="https://open.spotify.com/user/31cnszietssrlrsx7y5qcw3atsya" />
+             <SocialLink type="github" name="GitHub" handle="@anuranjan-dev" href="https://github.com/anuranjan-dev" />
+             <SocialLink type="instagram" name="Instagram" handle="@itss_anuranjan" href="https://www.instagram.com/itss_anuranjan/" />
           </div>
         </div></section>
       </main>
-      <footer>built by <span>Nova</span> · no template, just freestyle</footer>
+       <footer>built by <span>Anuranjan</span> · no template, just freestyle</footer>
     </>
   );
 }
 
-function SocialLink({ type, name, handle, href }: { type: 'github' | 'instagram' | 'x' | 'spotify'; name: string; handle: string; href: string }) {
-  return <a href={href} target="_blank" rel="noopener noreferrer" className={`social-link ${type === 'x' ? 'twitter' : type}`} data-testid={`link-social-${type}`}><div className="sl-icon"><Icon type={type} /></div><div><div className="sl-name">{name}</div><div className="sl-handle">{handle}</div></div></a>;
+function SocialLink({ type, name, handle, href }: { type: 'github' | 'instagram'; name: string; handle: string; href: string }) {
+  return <a href={href} target="_blank" rel="noopener noreferrer" className={`social-link ${type}`} data-testid={`link-social-${type}`}><div className="sl-icon"><Icon type={type} /></div><div><div className="sl-name">{name}</div><div className="sl-handle">{handle}</div></div></a>;
 }
 
 export default App;
