@@ -4,12 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
 const rawPort = process.env.PORT;
-if (!rawPort) {
-  throw new Error("PORT environment variable is required but was not provided.");
-}
-
-const port = Number(rawPort);
-if (Number.isNaN(port) || port <= 0) {
+const port = rawPort ? Number(rawPort) : undefined;
+if (rawPort && (port === undefined || Number.isNaN(port) || port <= 0)) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
@@ -34,8 +30,7 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    port,
-    strictPort: true,
+    ...(port ? { port, strictPort: true } : {}),
     host: "0.0.0.0",
     allowedHosts: true,
     fs: {
@@ -43,7 +38,7 @@ export default defineConfig({
     },
   },
   preview: {
-    port,
+    ...(port ? { port } : {}),
     host: "0.0.0.0",
     allowedHosts: true,
   },
