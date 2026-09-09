@@ -1,0 +1,6 @@
+{
+  "framework": "vite",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "BASE_PATH=/ pnpm --filter @workspace/nova-website run build",
+  "outputDirectory": "artifacts/nova-website/dist/public"
+}
