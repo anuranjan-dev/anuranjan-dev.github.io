@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement } from 'react';
 
 type ThemeId = 'light' | 'dark' | 'cobalt' | 'midnight' | 'sepia' | 'ivory' | 'terminal' | 'cli';
 
@@ -78,6 +78,15 @@ function ageText() {
   return `${age} – ${age + 1}`;
 }
 
+function CliType({ text, block = false, cursor = false, className = '' }: { text: string; block?: boolean; cursor?: boolean; className?: string }) {
+  const style = {
+    '--cli-steps': Math.max(Array.from(text).length, 1),
+    '--cli-duration': `${Math.max(.45, Math.min(2.4, text.length * .035))}s`,
+  } as CSSProperties;
+
+  return <span className={`cli-type${block ? ' cli-type-block' : ''}${cursor ? ' cli-cursor' : ''}${className ? ` ${className}` : ''}`} style={style}>{text}</span>;
+}
+
 function App() {
   const [theme, setTheme] = useState<ThemeId>(() => (localStorage.getItem('anuranjan-theme') as ThemeId) || 'dark');
   const [themeOpen, setThemeOpen] = useState(false);
@@ -122,65 +131,65 @@ function App() {
           {themes.find((item) => item.id === theme)?.icon}
         </button>
         <div className={`theme-dropdown${themeOpen ? ' open' : ''}`} data-testid="theme-dropdown">
-          {themes.map((item) => <button className={`theme-option${item.id === theme ? ' active' : ''}`} type="button" key={item.id} data-testid={`button-theme-${item.id}`} onClick={() => { setTheme(item.id); setThemeOpen(false); }}>{item.icon}<span>{item.label}</span></button>)}
+          {themes.map((item) => <button className={`theme-option${item.id === theme ? ' active' : ''}`} type="button" key={item.id} data-testid={`button-theme-${item.id}`} onClick={() => { setTheme(item.id); setThemeOpen(false); }}>{item.icon}<CliType text={item.label} /></button>)}
         </div>
       </div>
 
       <nav className="floating-nav" aria-label="Primary navigation" data-testid="floating-navigation">
-        {['hero:Home', 'about:About', 'hobbies:Hobbies', 'projects:Projects', 'contact:Contact'].map((item) => {
+          {['hero:Home', 'about:About', 'hobbies:Hobbies', 'projects:Projects', 'contact:Contact'].map((item) => {
           const [id, label] = item.split(':');
-          return <a key={id} className={activeSection === id ? 'active' : ''} href={`#${id}`} data-testid={`link-nav-${id}`}>{label}</a>;
+            return <a key={id} className={activeSection === id ? 'active' : ''} href={`#${id}`} data-testid={`link-nav-${id}`}><CliType text={label} /></a>;
         })}
       </nav>
 
       <main>
         <section id="hero" data-testid="section-hero">
-          <p className="hero-eyebrow" data-testid="text-hero-eyebrow">// welcome to my corner of the internet</p>
-           <h1 className="hero-name" data-testid="text-hero-name">Anu<span>ranjan</span></h1>
-          <p className="hero-quote" data-testid="text-hero-quote">{quote}</p>
+           <p className="hero-eyebrow" data-testid="text-hero-eyebrow"><CliType text="// welcome to my corner of the internet" cursor /></p>
+            <h1 className="hero-name" data-testid="text-hero-name"><CliType text="Anu" /><CliType text="ranjan" className="hero-name-accent" cursor /></h1>
+           <p className="hero-quote" data-testid="text-hero-quote"><CliType key={quote} text={quote} block cursor /></p>
           <button className={`quote-reroll${quoteSpinning ? ' spinning' : ''}`} type="button" aria-label="New quote" title="Another quote" data-testid="button-new-quote" onClick={reroll}><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></button>
-          <div className="age-row"><span className="age-pill" data-testid="text-age-hero">{age}</span><button className={`age-info${ageInfo ? ' open' : ''}`} type="button" aria-label="Age info" data-testid="button-age-info" onClick={() => setAgeInfo((open) => !open)}>ⓘ<span className="age-tip">Different people count age differently.<br /><strong>Left</strong> = years completed &nbsp;|&nbsp; <strong>Right</strong> = year running</span></button></div>
-          <div className="scroll-cue"><div className="scroll-line" /><span>scroll</span></div>
+           <div className="age-row"><span className="age-pill" data-testid="text-age-hero"><CliType text={age} /></span><button className={`age-info${ageInfo ? ' open' : ''}`} type="button" aria-label="Age info" data-testid="button-age-info" onClick={() => setAgeInfo((open) => !open)}>ⓘ<span className="age-tip"><CliType text="Different people count age differently." block /><br /><strong><CliType text="Left" /></strong> = years completed &nbsp;|&nbsp; <strong><CliType text="Right" /></strong> = year running</span></button></div>
+           <div className="scroll-cue"><div className="scroll-line" /><CliType text="scroll" /></div>
         </section>
 
         <section id="about" data-testid="section-about"><div className="container reveal">
-           <div className="section-label">01 — about</div><h2 className="section-title">Hey, I'm <em>Anuranjan</em></h2>
-           <p className="about-body">Just a person on the internet who likes making things — code, AI experiments, interfaces, and ideas that begin as random notes. I like exploring, building, and seeing how far one small idea can go.</p>
+            <div className="section-label"><CliType text="01 — about" cursor /></div><h2 className="section-title"><CliType text="Hey, I'm " /><em><CliType text="Anuranjan" cursor /></em></h2>
+            <p className="about-body"><CliType text="Just a person on the internet who likes making things — code, AI experiments, interfaces, and ideas that begin as random notes. I like exploring, building, and seeing how far one small idea can go." block /></p>
           <div className="about-grid">
-             {[['identity', 'Anuranjan'], ['age', age], ['status', 'Perpetually online'], ['vibe', 'Chaotic creative']].map(([label, value]) => <div className="about-card" key={label}><div className="about-card-label">{label}</div><div className={`about-card-value${label === 'age' ? ' age-val' : ''}`} data-testid={`text-about-${label}`}>{value}</div></div>)}
+              {[['identity', 'Anuranjan'], ['age', age], ['status', 'Perpetually online'], ['vibe', 'Chaotic creative']].map(([label, value]) => <div className="about-card" key={label}><div className="about-card-label"><CliType text={label} /></div><div className={`about-card-value${label === 'age' ? ' age-val' : ''}`} data-testid={`text-about-${label}`}><CliType text={value} /></div></div>)}
           </div>
         </div></section>
 
         <section id="hobbies" data-testid="section-hobbies"><div className="container reveal">
-          <div className="section-label">02 — hobbies &amp; interests</div><h2 className="section-title">Things I <em>actually</em> do</h2>
-          <div className="hobbies-grid">{hobbies.map((hobby) => <div className="hobby-card" key={hobby.title} data-testid={`card-hobby-${hobby.title.toLowerCase()}`}><span className="hobby-icon" aria-hidden="true">{hobby.icon}</span><div className="hobby-title">{hobby.title}</div><div className="hobby-desc">{hobby.desc}</div></div>)}</div>
+           <div className="section-label"><CliType text="02 — hobbies & interests" cursor /></div><h2 className="section-title"><CliType text="Things I " /><em><CliType text="actually" cursor /></em><CliType text=" do" /></h2>
+           <div className="hobbies-grid">{hobbies.map((hobby) => <div className="hobby-card" key={hobby.title} data-testid={`card-hobby-${hobby.title.toLowerCase()}`}><span className="hobby-icon" aria-hidden="true">{hobby.icon}</span><div className="hobby-title"><CliType text={hobby.title} /></div><div className="hobby-desc"><CliType text={hobby.desc} block /></div></div>)}</div>
         </div></section>
 
         <section id="projects" data-testid="section-projects"><div className="container reveal">
-          <div className="section-label">03 — projects</div><h2 className="section-title">What I've been <em>building</em></h2>
-           <div className="projects-list">{projects.map((project, index) => <div className="project-card" key={project.name} data-testid={`card-project-${index + 1}`}><div className="project-num">{String(index + 1).padStart(3, '0')}</div><div className="project-info"><div className="project-title">{project.name}</div><div className="project-desc">{project.desc}</div><div className="project-tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}<span className="badge">{project.status}</span></div></div></div>)}</div>
-           <div className="view-all-wrap"><div className="view-all-btn" data-testid="text-more-projects">MORE PROJECTS SOON<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></div></div>
+           <div className="section-label"><CliType text="03 — projects" cursor /></div><h2 className="section-title"><CliType text="What I've been " /><em><CliType text="building" cursor /></em></h2>
+            <div className="projects-list">{projects.map((project, index) => <div className="project-card" key={project.name} data-testid={`card-project-${index + 1}`}><div className="project-num"><CliType text={String(index + 1).padStart(3, '0')} /></div><div className="project-info"><div className="project-title"><CliType text={project.name} /></div><div className="project-desc"><CliType text={project.desc} block /></div><div className="project-tags">{project.tags.map((tag) => <span className="tag" key={tag}><CliType text={tag} /></span>)}<span className="badge"><CliType text={project.status} /></span></div></div></div>)}</div>
+            <div className="view-all-wrap"><div className="view-all-btn" data-testid="text-more-projects"><CliType text="MORE PROJECTS SOON" /><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></div></div>
         </div></section>
 
         <section id="contact" data-testid="section-contact"><div className="container reveal">
-          <div className="section-label">04 — contact &amp; socials</div><h2 className="section-title">Find me <em>online</em></h2>
+           <div className="section-label"><CliType text="04 — contact & socials" cursor /></div><h2 className="section-title"><CliType text="Find me " /><em><CliType text="online" cursor /></em></h2>
           <div className="contact-grid">
              <a href="https://discord.com/users/1411793737453015231" target="_blank" rel="noopener noreferrer" className="discord-card" data-testid="link-discord">
-               <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={`${import.meta.env.BASE_URL}images/discord-avatar.png`} alt="Discord icon" /><div className="dc-dot online" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name">Instanik</div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username">instanik_62687</div></div></div>
-              <div className="dc-activity"><span className="dc-loading">// connecting...</span></div>
+                <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={`${import.meta.env.BASE_URL}images/discord-avatar.png`} alt="Discord icon" /><div className="dc-dot online" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name"><CliType text="Instanik" /></div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username"><CliType text="instanik_62687" /></div></div></div>
+               <div className="dc-activity"><span className="dc-loading"><CliType text="// connecting..." /></span></div>
             </a>
              <SocialLink type="github" name="GitHub" handle="@anuranjan-dev" href="https://github.com/anuranjan-dev" />
              <SocialLink type="instagram" name="Instagram" handle="@itss_anuranjan" href="https://www.instagram.com/itss_anuranjan/" />
           </div>
         </div></section>
       </main>
-       <footer>built by <span>Anuranjan</span> · no template, just freestyle</footer>
+        <footer><CliType text="built by " /><span><CliType text="Anuranjan" /></span><CliType text=" · no template, just freestyle" /></footer>
     </>
   );
 }
 
 function SocialLink({ type, name, handle, href }: { type: 'github' | 'instagram'; name: string; handle: string; href: string }) {
-  return <a href={href} target="_blank" rel="noopener noreferrer" className={`social-link ${type}`} data-testid={`link-social-${type}`}><div className="sl-icon"><Icon type={type} /></div><div><div className="sl-name">{name}</div><div className="sl-handle">{handle}</div></div></a>;
+  return <a href={href} target="_blank" rel="noopener noreferrer" className={`social-link ${type}`} data-testid={`link-social-${type}`}><div className="sl-icon"><Icon type={type} /></div><div><div className="sl-name"><CliType text={name} /></div><div className="sl-handle"><CliType text={handle} /></div></div></a>;
 }
 
 export default App;
