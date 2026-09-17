@@ -1,0 +1,26 @@
+I need help fixing two bugs across my whole portfolio website (dark theme, terminal/CLI style, green monospace text).
+
+BUG 1 — Missing spaces around styled/highlighted words
+Several headings render with no space between plain text and a highlighted span, e.g.:
+- "Hey, I'mAnuranjan" should be "Hey, I'm Anuranjan"
+- "Things Iactually do" should be "Things I actually do"
+- "What I've beenbuilding" should be "What I've been building"
+- "Find meonline" should be "Find me online"
+
+This is likely because a styled element (span, motion component, etc.) sits directly against the previous word with no whitespace in the JSX/HTML, like:
+<h2>Hey, I'm<span className="highlight">Anuranjan</span></h2>
+
+Please search the entire codebase for every heading/text block that has a styled or highlighted word, and add a space between the plain text and the styled element (a literal space, {' '} in JSX, or &nbsp;). Fix every occurrence, not just the examples above — check all sections (About, Hobbies, Projects, Contact, etc.).
+
+BUG 2 — Mobile viewport is zoomed in and misaligned
+On mobile, the site loads zoomed in and requires manually pinching out. Once zoomed out, elements like the nav bar are no longer centered and the layout looks spread out/broken.
+
+Please:
+1. Confirm the <head> has this viewport meta tag, and add/fix it if missing or incorrect:
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+2. Audit the CSS for any containers with fixed pixel widths that should instead use max-width + width: 100% + margin: 0 auto, or relative units (%, rem, vw).
+3. Make sure the nav bar and all major sections use flexbox/grid with proper centering (justify-content: center, margin: 0 auto) rather than fixed positioning that breaks on small screens.
+4. Add or review mobile media queries (e.g. @media (max-width: 768px)) so text, cards, and spacing scale correctly.
+5. Check for any element wider than the mobile viewport causing horizontal overflow/scroll.
+
+Please go through the entire site (not just the homepage) and fix both issues everywhere they occur.
