@@ -153,7 +153,7 @@ function App() {
         </section>
 
         <section id="about" data-testid="section-about"><div className="container reveal">
-            <div className="section-label"><CliType text="01 — about" cursor /></div><h2 className="section-title"><CliType text="Hey, I'm " /><em><CliType text="Anuranjan" cursor /></em></h2>
+             <div className="section-label"><CliType text="01 — about" cursor /></div><h2 className="section-title"><CliType text="Hey, I'm" />{' '}<em><CliType text="Anuranjan" cursor /></em></h2>
             <p className="about-body"><CliType text="Just a person on the internet who likes making things — code, AI experiments, interfaces, and ideas that begin as random notes. I like exploring, building, and seeing how far one small idea can go." block /></p>
           <div className="about-grid">
               {[['identity', 'Anuranjan'], ['age', age], ['status', 'Perpetually online'], ['vibe', 'Chaotic creative']].map(([label, value]) => <div className="about-card" key={label}><div className="about-card-label"><CliType text={label} /></div><div className={`about-card-value${label === 'age' ? ' age-val' : ''}`} data-testid={`text-about-${label}`}><CliType text={value} /></div></div>)}
@@ -161,18 +161,18 @@ function App() {
         </div></section>
 
         <section id="hobbies" data-testid="section-hobbies"><div className="container reveal">
-           <div className="section-label"><CliType text="02 — hobbies & interests" cursor /></div><h2 className="section-title"><CliType text="Things I " /><em><CliType text="actually" cursor /></em><CliType text=" do" /></h2>
+           <div className="section-label"><CliType text="02 — hobbies & interests" cursor /></div><h2 className="section-title"><CliType text="Things I" />{' '}<em><CliType text="actually" cursor /></em>{' '}<CliType text="do" /></h2>
            <div className="hobbies-grid">{hobbies.map((hobby) => <div className="hobby-card" key={hobby.title} data-testid={`card-hobby-${hobby.title.toLowerCase()}`}><span className="hobby-icon" aria-hidden="true">{hobby.icon}</span><div className="hobby-title"><CliType text={hobby.title} /></div><div className="hobby-desc"><CliType text={hobby.desc} block /></div></div>)}</div>
         </div></section>
 
         <section id="projects" data-testid="section-projects"><div className="container reveal">
-           <div className="section-label"><CliType text="03 — projects" cursor /></div><h2 className="section-title"><CliType text="What I've been " /><em><CliType text="building" cursor /></em></h2>
+           <div className="section-label"><CliType text="03 — projects" cursor /></div><h2 className="section-title"><CliType text="What I've been" />{' '}<em><CliType text="building" cursor /></em></h2>
             <div className="projects-list">{projects.map((project, index) => <div className="project-card" key={project.name} data-testid={`card-project-${index + 1}`}><div className="project-num"><CliType text={String(index + 1).padStart(3, '0')} /></div><div className="project-info"><div className="project-title"><CliType text={project.name} /></div><div className="project-desc"><CliType text={project.desc} block /></div><div className="project-tags">{project.tags.map((tag) => <span className="tag" key={tag}><CliType text={tag} /></span>)}<span className="badge"><CliType text={project.status} /></span></div></div></div>)}</div>
             <div className="view-all-wrap"><div className="view-all-btn" data-testid="text-more-projects"><CliType text="MORE PROJECTS SOON" /><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></div></div>
         </div></section>
 
         <section id="contact" data-testid="section-contact"><div className="container reveal">
-           <div className="section-label"><CliType text="04 — contact & socials" cursor /></div><h2 className="section-title"><CliType text="Find me " /><em><CliType text="online" cursor /></em></h2>
+           <div className="section-label"><CliType text="04 — contact & socials" cursor /></div><h2 className="section-title"><CliType text="Find me" />{' '}<em><CliType text="online" cursor /></em></h2>
           <div className="contact-grid">
              <a href="https://discord.com/users/1411793737453015231" target="_blank" rel="noopener noreferrer" className="discord-card" data-testid="link-discord">
                 <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={`${import.meta.env.BASE_URL}images/discord-avatar.png`} alt="Discord icon" /><div className="dc-dot online" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name"><CliType text="Instanik" /></div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username"><CliType text="instanik_62687" /></div></div></div>
@@ -183,7 +183,7 @@ function App() {
           </div>
         </div></section>
       </main>
-        <footer><CliType text="built by " /><span><CliType text="Anuranjan" /></span><CliType text=" · no template, just freestyle" /></footer>
+         <footer><CliType text="built by" />{' '}<span><CliType text="Anuranjan" /></span><CliType text=" · no template, just freestyle" /></footer>
     </>
   );
 }
