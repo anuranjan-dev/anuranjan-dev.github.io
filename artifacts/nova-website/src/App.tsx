@@ -52,6 +52,9 @@ const projects = [
   { name: 'NOVA', desc: 'An AI marketing intelligence platform for youth-focused brands. It helps turn cultural signals and online trends into useful content ideas and campaign directions.', tags: ['AI', 'WEB'], status: 'in progress' },
 ];
 
+const DISCORD_USER_ID = '1411793737453015231';
+const INITIAL_DISCORD_AVATAR = 'https://cdn.discordapp.com/avatars/1411793737453015231/8d91068521116c0b54a0a131136a6af6.png?size=256';
+
 function Icon({ type }: { type: 'github' | 'instagram' }) {
   if (type === 'github') return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>;
   if (type === 'instagram') return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor" stroke="none"/></svg>;
@@ -94,6 +97,8 @@ function App() {
   const [quote, setQuote] = useState('My workflow starts with being annoyed. Then I cook.');
   const [quoteSpinning, setQuoteSpinning] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [discordAvatar, setDiscordAvatar] = useState(INITIAL_DISCORD_AVATAR);
+  const [discordSyncStatus, setDiscordSyncStatus] = useState<'syncing' | 'ready' | 'error'>('syncing');
   const quoteQueue = useRef<string[]>([]);
   const age = useMemo(() => ageText(), []);
 
@@ -112,6 +117,60 @@ function App() {
     }), { threshold: .45 });
     document.querySelectorAll('section[id]').forEach((el) => navObserver.observe(el));
     return () => { revealObserver.disconnect(); navObserver.disconnect(); };
+  }, []);
+
+  useEffect(() => {
+    let disposed = false;
+    let activeController: AbortController | null = null;
+
+    const refreshDiscordAvatar = async () => {
+      activeController?.abort();
+      const controller = new AbortController();
+      activeController = controller;
+
+      try {
+        const response = await fetch('/api/discord/profile', {
+          cache: 'no-store',
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+        });
+
+        if (!response.ok) throw new Error(`Discord profile request failed: ${response.status}`);
+
+        const profile: unknown = await response.json();
+        if (
+          typeof profile !== 'object' ||
+          profile === null ||
+          !('id' in profile) ||
+          profile.id !== DISCORD_USER_ID ||
+          !('avatarUrl' in profile) ||
+          (typeof profile.avatarUrl !== 'string' && profile.avatarUrl !== null)
+        ) {
+          throw new Error('Discord profile response was invalid');
+        }
+
+        if (disposed) return;
+        if (profile.avatarUrl) setDiscordAvatar(profile.avatarUrl);
+        setDiscordSyncStatus('ready');
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+        if (!disposed) setDiscordSyncStatus('error');
+      }
+    };
+
+    void refreshDiscordAvatar();
+    const interval = window.setInterval(refreshDiscordAvatar, 15 * 60 * 1000);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') void refreshDiscordAvatar();
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      disposed = true;
+      activeController?.abort();
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   const reroll = () => {
@@ -175,8 +234,8 @@ function App() {
            <div className="section-label"><CliType text="04 — contact & socials" cursor /></div><h2 className="section-title"><CliType text="Find me" />{' '}<em><CliType text="online" cursor /></em></h2>
           <div className="contact-grid">
              <a href="https://discord.com/users/1411793737453015231" target="_blank" rel="noopener noreferrer" className="discord-card" data-testid="link-discord">
-                <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={`${import.meta.env.BASE_URL}images/discord-avatar.png`} alt="Discord icon" /><div className="dc-dot online" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name"><CliType text="Instanik" /></div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username"><CliType text="instanik_62687" /></div></div></div>
-               <div className="dc-activity"><span className="dc-loading"><CliType text="// connecting..." /></span></div>
+                 <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={discordAvatar} alt="Instanik's Discord profile picture" /><div className="dc-dot" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name"><CliType text="Instanik" /></div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username"><CliType text="instanik_62687" /></div></div></div>
+                <div className="dc-activity"><span className={`dc-loading ${discordSyncStatus}`}><CliType text={discordSyncStatus === 'ready' ? '// profile synced' : discordSyncStatus === 'error' ? '// avatar sync unavailable' : '// syncing avatar'} /></span></div>
             </a>
              <SocialLink type="github" name="GitHub" handle="@anuranjan-dev" href="https://github.com/anuranjan-dev" />
              <SocialLink type="instagram" name="Instagram" handle="@itss_anuranjan" href="https://www.instagram.com/itss_anuranjan/" />
