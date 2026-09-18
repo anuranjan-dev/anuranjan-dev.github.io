@@ -235,7 +235,7 @@ function App() {
           <div className="contact-grid">
              <a href="https://discord.com/users/1411793737453015231" target="_blank" rel="noopener noreferrer" className="discord-card" data-testid="link-discord">
                  <div className="dc-profile"><div className="dc-avatar-wrap"><img className="dc-avatar" src={discordAvatar} alt="Instanik's Discord profile picture" /><div className="dc-dot" /></div><div className="dc-info"><div className="dc-name-row"><div className="dc-name"><CliType text="Instanik" /></div><div className="dc-platform"><DiscordIcon /></div></div><div className="dc-username"><CliType text="instanik_62687" /></div></div></div>
-                <div className="dc-activity"><span className={`dc-loading ${discordSyncStatus}`}><CliType text={discordSyncStatus === 'ready' ? '// profile synced' : discordSyncStatus === 'error' ? '// avatar sync unavailable' : '// syncing avatar'} /></span></div>
+                <div className="dc-activity"><span className={`dc-loading ${discordSyncStatus}`}><CliType text={discordSyncStatus === 'ready' ? "// yep, that's me" : discordSyncStatus === 'error' ? '// avatar sync unavailable' : '// syncing avatar'} /></span></div>
             </a>
              <SocialLink type="github" name="GitHub" handle="@anuranjan-dev" href="https://github.com/anuranjan-dev" />
              <SocialLink type="instagram" name="Instagram" handle="@itss_anuranjan" href="https://www.instagram.com/itss_anuranjan/" />
